@@ -5,17 +5,18 @@ variable "location" {
 
 }
 
-variable "ntier_vnet_info" {
+variable "ntier_task_info" {
   type = object({
-    terraform_vnetsub = list(string),
-    subnet_names      = list(string),
+    resource_group = string
+    vnet           = list(string)
+    subnets        = list(string)
+    sql_server     = string
 
   })
-
-
   default = {
-    terraform_vnetsub = ["192.168.0.0/16"]
-    subnet_names      = ["app11", "web11", "db11", "app22", "web22", "db22"]
-
+    resource_group = "ntier_rg"
+    vnet           = ["192.168.0.0/16"]
+    subnets        = ["app", "db"]
+    sql_server     = "ntier_sql"
   }
 }
