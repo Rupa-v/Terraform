@@ -5,15 +5,17 @@ variable "location" {
 
 }
 
-variable "terraform_vnetsub" {
-  type        = list(string)
-  default     = ["192.168.0.0/16"]
-  description = "cidr range of vnet"
+variable "ntier_vnet_info" {
+  type = object({
+    terraform_vnetsub = list(string),
+    subnet_names      = list(string),
 
-}
+  })
 
-variable "subnet_names" {
-  type    = list(string)
-  default = ["app11", "web11", "db11", "app22", "web22", "db22"]
 
+  default = {
+    terraform_vnetsub = ["192.168.0.0/16"]
+    subnet_names      = ["app11", "web11", "db11", "app22", "web22", "db22"]
+
+  }
 }
