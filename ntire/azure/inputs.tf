@@ -20,3 +20,9 @@ variable "ntier_task_info" {
     sql_server     = "ntier-sql"
   }
 }
+
+variable "appsubnet_index" {
+  type    = number
+  default = 0
+
+}
