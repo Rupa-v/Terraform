@@ -17,6 +17,6 @@ variable "ntier_task_info" {
     resource_group = "ntier_rg"
     vnet           = ["192.168.0.0/16"]
     subnets        = ["app", "db"]
-    sql_server     = "ntier_sql"
+    sql_server     = "ntier-sql"
   }
 }
