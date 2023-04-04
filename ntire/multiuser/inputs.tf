@@ -16,12 +16,14 @@ variable "ntier_task_info" {
   default = {
     resource_group = "ntier_rg"
     vnet           = ["192.168.0.0/16"]
-    subnets        = ["app"]
+    subnets        = ["app", "web"]
   }
 }
-
 variable "appsubnet_index" {
   type    = number
   default = 0
-
+}
+variable "websubnet_index" {
+  type    = number
+  default = 1
 }

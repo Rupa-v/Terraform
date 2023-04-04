@@ -44,7 +44,6 @@ resource "azurerm_network_security_group" "openall" {
   }
 
 }
-
 resource "azurerm_public_ip" "publicIP" {
   name                = "pub_ip"
   location            = var.location
@@ -53,7 +52,6 @@ resource "azurerm_public_ip" "publicIP" {
 
 
 }
-
 resource "azurerm_network_interface" "web_nic" {
   name                = "wepnic"
   location            = var.location
@@ -69,27 +67,26 @@ resource "azurerm_network_interface" "web_nic" {
     azurerm_subnet.subnets
   ]
 }
-
 resource "azurerm_linux_virtual_machine" "apache" {
   name                = "apache"
   location            = var.location
   resource_group_name = azurerm_resource_group.resource_group.name
   size                = "Standard_B1s"
-  admin_username      = "RUPAANAND"
+  admin_username      = "RUPA_ANAND"
   custom_data         = filebase64("apache.sh")
   network_interface_ids = [
     azurerm_network_interface.web_nic.id,
   ]
 
   admin_ssh_key {
-    username   = "RUPAANAND"
+    username   = "RUPA_ANAND"
     public_key = file("~/.ssh/id_rsa.pub")
   }
-
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
@@ -98,10 +95,9 @@ resource "azurerm_linux_virtual_machine" "apache" {
   }
 }
 
+
 resource "azurerm_network_interface_security_group_association" "apachenisg" {
   network_interface_id      = azurerm_network_interface.web_nic.id
   network_security_group_id = azurerm_network_security_group.openall.id
-
-
 }
 
