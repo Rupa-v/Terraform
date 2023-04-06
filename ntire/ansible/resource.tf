@@ -71,8 +71,8 @@ resource "azurerm_network_interface_security_group_association" "apachenisg" {
   network_interface_id      = azurerm_network_interface.web_nic.id
   network_security_group_id = azurerm_network_security_group.openall.id
 }
-resource "azurerm_linux_virtual_machine" "apache" {
-  name                = "apache"
+resource "azurerm_linux_virtual_machine" "terraformansible" {
+  name                = "terraformansible"
   location            = var.location
   resource_group_name = azurerm_resource_group.resource_group.name
   size                = "Standard_B1s"
@@ -96,25 +96,6 @@ resource "azurerm_linux_virtual_machine" "apache" {
     offer     = "0001-com-ubuntu-server-focal"
     sku       = "20_04-lts-gen2"
     version   = "latest"
-  }
-  connection {
-    type        = "ssh"
-    user        = self.admin_username
-    private_key = file("~/.ssh/id_rsa")
-    host = self.public_ip_address
-
-  }
-  provisioner "file" {
-    source      = "ansible.sh"
-    destination = "/home/RUPA_ANAND/ansible.sh"
-
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt install apache2 -y"
-    ]
-
   }
 }
 
