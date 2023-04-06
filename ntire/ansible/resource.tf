@@ -78,6 +78,7 @@ resource "azurerm_linux_virtual_machine" "terraformansible" {
   size                = "Standard_B1s"
   admin_username      = "RUPA_ANAND"
   admin_password = "rupa@1234567"
+  disable_password_authentication = true
   custom_data         = filebase64("ansible.sh")
   network_interface_ids = [
     azurerm_network_interface.web_nic.id,
